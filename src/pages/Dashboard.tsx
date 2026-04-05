@@ -181,6 +181,16 @@ export function DashboardPage() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Branding Footer */}
+          <div className="pt-8 pb-4 flex items-center justify-between border-t border-white/5 opacity-30">
+            <div className="flex gap-4">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Built by Hustla</span>
+              <div className="h-3 w-px bg-white/20" />
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Ethernine Protocol</span>
+            </div>
+            <span className="text-[10px] font-mono">© 2026 TQS WORKSTATION</span>
+          </div>
         </div>
 
         {/* Right Chat Sidebar Lounge (Placeholder integration) */}

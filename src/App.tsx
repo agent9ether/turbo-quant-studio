@@ -35,8 +35,9 @@ function Layout() {
             <div className="p-2 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg cyber-glow">
               <HardDrive className="h-5 w-5 text-white" />
             </div>
-            <h1 className="font-black text-xl tracking-widest text-white italic uppercase">
+            <h1 className="font-black text-xl tracking-widest text-white italic uppercase flex items-baseline gap-2">
               TurboQuant <span className="text-cyan-500 not-italic font-light opacity-50">Studio</span>
+              <span className="text-[10px] lowercase not-italic font-mono text-white/20 tracking-tighter">v1.1.0</span>
             </h1>
           </div>
           

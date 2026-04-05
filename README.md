@@ -1,4 +1,4 @@
-# 🚀 TurboQuant Studio
+# 🚀 TurboQuant Studio <span style="font-size: 0.4em; opacity: 0.5;">v1.1.0</span>
 
 **TurboQuant Studio** is a professional-grade, local quantization workstation built with Tauri, React, and `llama.cpp`. It provides an end-to-end pipeline to convert, quantize, and test LLMs directly on your desktop with a premium, real-time interface.
 
@@ -47,4 +47,4 @@
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
-Built with ❤️ for the open-source AI community.
+Built with ❤️ by **Hustla** | Powered by **Ethernine Protocol**
