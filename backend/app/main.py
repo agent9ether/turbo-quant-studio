@@ -50,14 +50,37 @@ def create_project(project: Project, session: Session = Depends(get_session)):
 
 @app.get("/system/diagnostics")
 def system_diagnostics():
-    """Returns simple system diagnostics."""
+    """Returns comprehensive system diagnostics including GPU."""
     import psutil
+    try:
+        import GPUtil
+        gpus = GPUtil.getGPUs()
+        gpu_info = [
+            {
+                "id": g.id,
+                "name": g.name,
+                "load": round(g.load * 100, 1),
+                "memory_used": round(g.memoryUsed, 1),
+                "memory_total": round(g.memoryTotal, 1),
+                "memory_util": round(g.memoryUtil * 100, 1),
+                "temp": g.temperature
+            } for g in gpus
+        ]
+    except Exception as e:
+        gpu_info = []
+        print(f"GPU Diagnostic error: {e}")
+
     vm = psutil.virtual_memory()
+    disk = psutil.disk_usage('/')
+    
     return {
+        "cpu_usage": psutil.cpu_percent(interval=None),
+        "ram_usage": vm.percent,
         "ram_total_gb": round(vm.total / (1024**3), 2),
         "ram_available_gb": round(vm.available / (1024**3), 2),
-        "cpu_cores": psutil.cpu_count(logical=False),
-        "cpu_threads": psutil.cpu_count(logical=True),
+        "disk_usage": disk.percent,
+        "gpu": gpu_info[0] if gpu_info else {"name": "No GPU detected", "load": 0, "memory_util": 0},
+        "all_gpus": gpu_info,
         "platform": os.uname().sysname if hasattr(os, "uname") else "Windows"
     }
 
