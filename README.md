@@ -43,6 +43,15 @@
    npm run tauri dev
    ```
 
+## 📖 How to Use
+
+1.  **Initialize**: Paste a local model path in the **Import** tab to start.
+2.  **Quantize**: Use the **Workbench** to select your bit-depth (e.g., `Q4_K_M`).
+3.  **Monitor**: Watch real-time **Analytics** gauges as your hardware processes the model.
+4.  **Test**: Launch the **Playground** to chat with your newly optimized model.
+
+For more detailed instructions, see the [User Guide (USAGE.md)](./USAGE.md).
+
 ## 📝 License
 Distributed under the MIT License. See `LICENSE` for more information.
 
