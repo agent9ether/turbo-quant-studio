@@ -52,6 +52,20 @@
 
 For more detailed instructions, see the [User Guide (USAGE.md)](./USAGE.md).
 
+## 🤝 Contributing
+
+We welcome and encourage contributions from the community! Whether you're fixing bugs, adding new quantization engines, or improving the Cyber-Technical UI, your help makes **TurboQuant Studio** better for everyone.
+
+1.  Fork the Project.
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`).
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to the Branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
+
+## 🔓 Open Source & Attribution
+
+This project is built on the shoulders of giants. We encourage others to use, modify, and build upon this codebase. We only ask that you **give credit where it's due** by attributing the original work to **Hustla** and the **Ethernine Protocol**.
+
 ## 📝 License
 Distributed under the MIT License. See `LICENSE` for more information.
 
