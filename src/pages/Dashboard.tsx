@@ -224,14 +224,49 @@ export function DashboardPage() {
 }
 
 function HardwareModule({ icon: Icon, label, value, detail, active }: any) {
+  const radius = 24;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (value / 100) * circumference;
+
+  // Color logic for the gauge
+  const getStrokeColor = () => {
+    if (value > 85) return "stroke-rose-500";
+    if (value > 60) return "stroke-amber-400";
+    return "stroke-cyan-500";
+  };
+
   return (
-    <div className={`flex flex-col items-center gap-2 group cursor-default`}>
-      <div className={`p-3 rounded-xl border transition-all duration-300 ${active ? 'bg-cyan-500/10 border-cyan-500 cyber-glow' : 'bg-white/5 border-white/10 group-hover:border-white/30'}`}>
-        <Icon className={`h-6 w-6 ${active ? 'text-cyan-400' : 'text-white/40'}`} />
+    <div className={`flex flex-col items-center gap-2 group cursor-default relative`}>
+      <div className={`relative p-3 rounded-xl border transition-all duration-300 ${active ? 'bg-cyan-500/5 border-cyan-500/20' : 'bg-white/5 border-white/10 group-hover:border-white/30'}`}>
+        {/* Gauge SVG */}
+        <svg className="absolute inset-0 -rotate-90 w-full h-full p-1" viewBox="0 0 64 64">
+          <circle
+            className="text-white/5"
+            strokeWidth="3"
+            stroke="currentColor"
+            fill="transparent"
+            r={radius}
+            cx="32"
+            cy="32"
+          />
+          <circle
+            className={`${getStrokeColor()} transition-all duration-1000 ease-out`}
+            strokeWidth="3"
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            fill="transparent"
+            r={radius}
+            cx="32"
+            cy="32"
+          />
+        </svg>
+
+        <Icon className={`h-6 w-6 relative z-10 ${active ? 'text-cyan-400' : 'text-white/40'}`} />
       </div>
       <div className="flex flex-col items-center gap-0.5">
         <span className={`text-[10px] font-bold tracking-tighter ${active ? 'text-cyan-400' : 'text-white/40'}`}>{label}</span>
-        <span className={`text-base font-black ${active ? 'text-white shadow-cyan-500/50 drop-shadow-md' : 'text-white/60'}`}>{value}%</span>
+        <span className={`text-base font-black ${active ? 'text-white' : 'text-white/60'}`}>{value}%</span>
         <span className="text-[8px] text-white/20 font-bold uppercase truncate max-w-[60px]">{detail}</span>
       </div>
     </div>

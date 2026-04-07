@@ -77,11 +77,16 @@ def system_diagnostics():
         "cpu_usage": psutil.cpu_percent(interval=None),
         "ram_usage": vm.percent,
         "ram_total_gb": round(vm.total / (1024**3), 2),
+        "ram_used_gb": round(vm.used / (1024**3), 2),
         "ram_available_gb": round(vm.available / (1024**3), 2),
         "disk_usage": disk.percent,
-        "gpu": gpu_info[0] if gpu_info else {"name": "No GPU detected", "load": 0, "memory_util": 0},
+        "disk_total_gb": round(disk.total / (1024**3), 2),
+        "disk_used_gb": round(disk.used / (1024**3), 2),
+        "gpu": gpu_info[0] if gpu_info else {"name": "No GPU detected", "load": 0, "memory_util": 0, "temp": 0},
         "all_gpus": gpu_info,
-        "platform": os.uname().sysname if hasattr(os, "uname") else "Windows"
+        "platform": os.uname().sysname if hasattr(os, "uname") else "Windows",
+        "cpu_cores": psutil.cpu_count(logical=False),
+        "cpu_threads": psutil.cpu_count(logical=True)
     }
 
 from .adapters import LlamaCppAdapter
@@ -203,6 +208,15 @@ def run_quant_job(job_id: int):
 def get_jobs(session: Session = Depends(get_session)):
     jobs = session.exec(select(QuantJob)).all()
     return jobs
+
+@app.delete("/jobs/{job_id}")
+def delete_job(job_id: int, session: Session = Depends(get_session)):
+    job = session.get(QuantJob, job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    session.delete(job)
+    session.commit()
+    return {"message": "Job deleted successfully"}
 
 import asyncio
 import httpx

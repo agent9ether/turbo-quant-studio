@@ -74,7 +74,7 @@ function Layout() {
       </header>
 
       {/* Main Content Viewport */}
-      <main className="flex-1 overflow-hidden relative">
+      <main className="flex-1 overflow-y-auto relative">
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/import" element={<ImportPage />} />
